@@ -1,0 +1,41 @@
+/*All Custom Overrides Follow*/
+
+body
+{
+    background: #111;    
+}
+
+.section-title .title
+{
+    color: #fff;
+}
+
+.about-skills .skill-item .skill-bar .bar-inner
+{
+    background-color: #262;
+}
+
+.gray-bg
+{
+    background: #222;
+}
+
+.footer-content ul li a
+{
+    background-color: #b1b1b1;
+}
+
+.footer-widget
+{
+    background-color: #0d2914;
+}
+
+.footer-content p
+{
+    color: #fff;
+}
+
+.back-to-top
+{
+    color: #fff;
+}
