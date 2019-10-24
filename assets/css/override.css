@@ -12,7 +12,7 @@ body
 
 .about-skills .skill-item .skill-bar .bar-inner
 {
-    background-color: #262;
+    background-color: #000;
 }
 
 .gray-bg
@@ -38,4 +38,9 @@ body
 .back-to-top
 {
     color: #fff;
+}
+
+p
+{
+    text-align: justify;
 }
