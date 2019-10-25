@@ -44,3 +44,8 @@ p
 {
     text-align: justify;
 }
+
+.header-image::after
+{
+    bottom: 53px;
+}
