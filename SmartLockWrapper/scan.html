@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <title>Smart Lock</title>
+        <link href="Files/style.css" rel="stylesheet" />
+    </head>
+    <body class="Index">
+        <svg xmlns="http://www.w3.org/2000/svg" class="Lock" width="100" height="100" viewBox="0 0 24 24"><path class="Icon" d="M17 9.761v-4.761c0-2.761-2.238-5-5-5-2.763 0-5 2.239-5 5v4.761c-1.827 1.466-3 3.714-3 6.239 0 4.418 3.582 8 8 8s8-3.582 8-8c0-2.525-1.173-4.773-3-6.239zm-5 8.239c-1.104 0-2-.896-2-2s.896-2 2-2 2 .896 2 2-.896 2-2 2zm3-9.413c-.927-.376-1.938-.587-3-.587s-2.073.211-3 .587v-3.587c0-1.654 1.346-3 3-3s3 1.346 3 3v3.587z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="Refresh" width="300" height="300" viewBox="0 0 27.5 24"><path class="Icon" d="M13.5 2c-5.629 0-10.212 4.436-10.475 10h-3.025l4.537 5.917 4.463-5.917h-2.975c.26-3.902 3.508-7 7.475-7 4.136 0 7.5 3.364 7.5 7.5s-3.364 7.5-7.5 7.5c-2.381 0-4.502-1.119-5.876-2.854l-1.847 2.449c1.919 2.088 4.664 3.405 7.723 3.405 5.798 0 10.5-4.702 10.5-10.5s-4.702-10.5-10.5-10.5z"/></svg>
+        
+        <input type="password" class="TextPin TextBox" maxlength="4"/>
+        <div class="Status"></div>
+        <div class="Message">Waiting for the lock to attach, ensure that the lock is turned ON and connected to the internet. This process is automatic.</div>
+        <script src="Files/jquery.min.js"></script>
+
+        <script type="text/javascript">
+            var tries = 0;
+            var lockstatus = 0;
+            var lockstate = 0;
+            
+            try
+            {
+                clearTimeout(timer);
+            }
+            catch(e)
+            {
+
+            }
+
+            $(function(){
+                checker = setInterval(function(){
+                    tries++;
+
+                    $.get(
+                        'data.txt', function(data){
+                            lockstatus = data[0];
+                            lockstate = data[1];
+                        }
+                    );
+
+                    if(tries>10 & lockstatus == 0)
+                    {
+                        $(".Status").css("background", "#ff0");
+                        $(".Message").html("Ensure that your lock is connected to the internet...");
+                    }
+                    
+                    if(tries>20 & lockstatus == 0)
+                    {
+                        $(".Status").css("background", "#f00");
+                        $(".Message").html("Couldn't connect to the lock. Try again later sometime.");
+                        clearInterval(checker);
+                    }
+
+                }, 2000);
+            });
+
+            $(".TextPin").keyup(function(){
+                pin = $(".TextPin").val();
+
+                if(pin == 9010)
+                {
+                    $(".Status").css("background", "#0f0");
+                    $(".Message").html("Pin accepted! Entering system.");
+
+                    timer = setTimeout(function(){
+                        location.href = "scan.html";
+                    }, 2000);
+                }
+            });
+        </script>
+    </body>
+</html>
